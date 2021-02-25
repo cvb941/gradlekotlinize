@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Convert Groovy to Kotlin build.gradle online</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700">
+    <link rel="stylesheet" href="assets/css/styles.css">
+<script src="GradleKotlinize.js"></script>
+</head>
+
+<body>
+    <header>
+        <h2 style="padding-left: 16px;background: var(--bs-success);color: var(--bs-white);padding-bottom: 8px;padding-top: 8px;">Gradle Kotlinize</h2>
+    </header>
+    <p>Paste your build.gradle into the left box. The contents will then be converted from Groovy to the new Kotlin-based Gradle build file format in the right box. Use the output in a file named build.gradle.kts in your project.</p>
+    <div class="container" style="max-width: 90%;height: 75vh;">
+        <div class="row" style="height: 100%;">
+            <div class="col-md-6"><strong>Groovy input - build.gradle<br></strong><textarea id="groovyInput" style="width: 100%;height: 92%;"></textarea></div>
+            <div class="col-md-6"><strong>Kotlin output - build.gradle.kts<br></strong><textarea id="kotlinOutput" style="width: 100%;height: 92%;" readonly=""></textarea></div>
+        </div>
+    </div>
+    <footer>
+        <p class="text-center" style="font-size: 12px;">This tool uses the&nbsp;<a href="https://github.com/bernaferrari/GradleKotlinConverter">GradleKotlinConverter</a>&nbsp;project created by&nbsp;<a href="https://github.com/bernaferrari">bernaferrari</a><br></p>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta2/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
