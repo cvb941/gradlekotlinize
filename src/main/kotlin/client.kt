@@ -17,8 +17,10 @@ fun main() {
             kotlinOutput.textContent = GradleKotlinConverter.convert(groovyInput.value)
             Unit.asDynamic()
         }
+
         groovyInput.onkeyup = convert
         groovyInput.onchange = convert
+
 
         Unit.asDynamic()
     }

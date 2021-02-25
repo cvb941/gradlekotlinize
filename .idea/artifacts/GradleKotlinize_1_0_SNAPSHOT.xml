@@ -1,8 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="jar" name="GradleKotlinize-1.0-SNAPSHOT">
-    <output-path>$PROJECT_DIR$/build/libs</output-path>
-    <root id="archive" name="GradleKotlinize-1.0-SNAPSHOT.jar">
-      <element id="module-output" name="GradleKotlinize.main" />
-    </root>
+    <output-path>C:\src\Kotlin\GradleKotlinize\build\libs</output-path>
+    <root id="archive" name="GradleKotlinize-1.0-SNAPSHOT.jar" />
   </artifact>
 </component>
