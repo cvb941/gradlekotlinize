@@ -35,3 +35,8 @@ kotlin {
         }
     }
 }
+
+task<Exec>("deployFirebase") {
+    dependsOn("browserProductionWebpack")
+    commandLine("cmd", "firebase", "deploy")
+}
