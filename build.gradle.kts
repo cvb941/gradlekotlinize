@@ -38,5 +38,5 @@ kotlin {
 
 task<Exec>("deployFirebase") {
     dependsOn("browserProductionWebpack")
-    commandLine("cmd", "firebase", "deploy")
+    commandLine("cmd", "/c", "firebase", "deploy")
 }

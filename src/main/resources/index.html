@@ -13,7 +13,9 @@
 
 <body>
     <header class="d-flex justify-content-between align-items-center justify-content-xl-start align-items-xl-center" style="background: var(--bs-green);height: 64px;padding-right: 42px;">
-        <h2 class="me-auto" style="padding-left: 16px;color: var(--bs-white);padding-bottom: 8px;padding-top: 8px;height: 50px;">Gradle Kotlinize</h2><img src="https://img.shields.io/github/stars/cvb941/gradlekotlinize?style=social"/>
+        <h2 class="me-auto" style="padding-left: 16px;color: var(--bs-white);padding-bottom: 8px;padding-top: 8px;height: 50px;">Gradle Kotlinize</h2> <a href="https://github.com/cvb941/gradlekotlinize">
+<img  alt="GitHub Repo stars" src="https://img.shields.io/github/stars/cvb941/gradlekotlinize?style=social">
+</a>
     </header>
     <p style="padding: 16px;padding-bottom: 8px;">Paste your build.gradle into the left box. The contents will then be converted from Groovy to the new Kotlin-based Gradle build file format in the right box. Use the output in a file named build.gradle.kts in your project.</p>
     <div class="container" style="max-width: 90%;height: 75vh;">
@@ -30,9 +32,14 @@
 <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
 <script src="/__/firebase/8.2.9/firebase-analytics.js"></script>
+<script src="/__/firebase/8.2.9/firebase-performance.js"></script>
 
 <!-- Initialize Firebase -->
 <script src="/__/firebase/init.js"></script>
+
+<script>
+    var perf = firebase.performance();
+</script>
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js" integrity="sha512-YBk7HhgDZvBxmtOfUdvX0z8IH2d10Hp3aEygaMNhtF8fSOvBZ16D/1bXZTJV6ndk/L/DlXxYStP8jrF77v2MIg==" crossorigin="anonymous"></script>
