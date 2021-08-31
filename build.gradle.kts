@@ -1,9 +1,9 @@
 plugins {
-    kotlin("js") version "1.4.30"
+    kotlin("js") version "1.5.30"
 }
 
 group = "net.kusik"
-version = "1.0-SNAPSHOT"
+version = "1.1-SNAPSHOT"
 
 repositories {
     jcenter()
@@ -13,7 +13,7 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test-js"))
-    implementation("org.jetbrains.kotlinx:kotlinx-html:0.7.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-html:0.7.3")
 }
 
 kotlin {

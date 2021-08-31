@@ -5,11 +5,13 @@ object GradleKotlinConverter {
             .replaceApostrophes()
             .replaceDefWithVal()
             .convertMapExpression() // Run before array
+            .convertFileTree()
             .convertArrayExpression()
             .convertManifestPlaceHoldersWithMap() // Run after convertMapExpression
             .convertVariableDeclaration()
             .convertPlugins()
             .convertPluginsIntoOneBlock()
+            .convertPluginsFrom()
             .convertVariantFilter()
             .convertAndroidBuildConfigFunctions()
             .convertCompileToImplementation()
@@ -27,6 +29,8 @@ object GradleKotlinConverter {
             .convertSourceSets()
             .convertSigningConfigs()
             .convertExcludeClasspath()
+            .convertExcludeModules()
+            .convertExcludeGroups()
             .convertJetBrainsKotlin()
             .convertSigningConfigBuildType()
             .convertExtToExtra()
@@ -87,13 +91,9 @@ object GradleKotlinConverter {
         val value = """[^,:\s\]]+"""
         val keyValueGroup = """\s*$key:\s*$value\s*"""
         val mapRegExp = """\[($keyValueGroup(?:,$keyValueGroup)*)\]""".toRegex()
-        val extractOneGroupRegExp =
-            """^\s*($key):\s*($value)\s*(?:,(.*)|)$""".toRegex() // Matches key, value, the-rest after comma if any
+        val extractOneGroupRegExp = """^\s*($key):\s*($value)\s*(?:,(.*)|)$""".toRegex() // Matches key, value, the-rest after comma if any
 
-        fun extractAllMatches(
-            matchesInKotlinCode: MutableList<String>,
-            remainingString: String
-        ) { // Extract the first key=value, and recurse on the postfix
+        fun extractAllMatches(matchesInKotlinCode: MutableList<String>, remainingString: String) { // Extract the first key=value, and recurse on the postfix
             val innerMatch: MatchResult = extractOneGroupRegExp.find(remainingString) ?: return
             val innerGroups = innerMatch.groupValues
             matchesInKotlinCode += """"${innerGroups[1]}" to ${innerGroups[2]}"""
@@ -159,6 +159,18 @@ object GradleKotlinConverter {
         }
     }
 
+    // apply from: "kotlin-android"
+// becomes
+// apply(from = "kotlin-android")
+    fun String.convertPluginsFrom(): String {
+        val pluginsExp = """apply from: (\S+)""".toRegex()
+
+        return this.replace(pluginsExp) {
+            val (pluginId) = it.destructured
+            "apply(from = $pluginId)"
+        }
+    }
+
     fun String.convertAndroidBuildConfigFunctions(): String {
         val outerExp = """(buildConfigField|resValue|flavorDimensions|exclude|java.srcDir)\s+(".*")""".toRegex()
         // packagingOptions > exclude
@@ -193,16 +205,16 @@ object GradleKotlinConverter {
 // implementation(":epoxy-annotations")
     fun String.convertDependencies(): String {
 
-        val testKeywords =
-            "testImplementation|androidTestImplementation|debugImplementation|compileOnly|testCompileOnly|runtimeOnly|developmentOnly"
-        val gradleKeywords =
-            "($testKeywords|implementation|api|annotationProcessor|classpath|kapt|kaptTest|kaptAndroidTest|check)".toRegex()
+        val testKeywords = "testImplementation|androidTestImplementation|debugImplementation|compileOnly|testCompileOnly|runtimeOnly|developmentOnly"
+        val gradleKeywords = "($testKeywords|implementation|api|annotationProcessor|classpath|kaptTest|kaptAndroidTest|kapt|check)".toRegex()
 
         // ignore cases like kapt { correctErrorTypes = true } and apply plugin: ('kotlin-kapt") but pass kapt("...")
         // ignore keyWord followed by a space and a { or a " and a )
         val validKeywords = "(?!$gradleKeywords\\s*(\\{|\"\\)|\\.))$gradleKeywords.*".toRegex()
 
         return this.replace(validKeywords) { substring ->
+            // By pass sth like: implementation(":epoxy-annotations") { ... }
+            if (substring.value.contains("""\)(\s*)\{""".toRegex())) return@replace substring.value
 
             // retrieve the comment [//this is a comment], if any
             val comment = "\\s*\\/\\/.*".toRegex().find(substring.value)?.value ?: ""
@@ -223,6 +235,15 @@ object GradleKotlinConverter {
                 "$gradleKeyword$isolated$comment"
             }
         }
+    }
+
+    // fileTree(dir: "libs", include: ["*.jar"])
+// becomes
+// fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar")))
+    fun String.convertFileTree(): String {
+        val fileTreeString = """fileTree\(dir(\s*):(\s*)"libs"(\s*),(\s*)include(\s*):(\s*)\["\*.jar"\]\)""".toRegex()
+
+        return this.replace(fileTreeString, """fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar")))""")
     }
 
 
@@ -308,7 +329,7 @@ object GradleKotlinConverter {
 // maven("https://maven.fabric.io/public")
     fun String.convertMaven(): String {
 
-        val mavenExp = "maven\\s*\\{\\s*url\\s*(.*?)\\s*?}".toRegex()
+        val mavenExp = "maven\\s*\\{\\s*url\\s*(.*?)\\s*?\\}".toRegex()
 
         return this.replace(mavenExp) {
             it.value.replace("(= *uri *\\()|\\)|(url)|( )".toRegex(), "")
@@ -324,8 +345,7 @@ object GradleKotlinConverter {
 // compileSdkVersion(28)
     fun String.addParentheses(): String {
 
-        val sdkExp =
-            "(compileSdkVersion|minSdkVersion|targetSdkVersion)\\s*([^\\s]*)(.*)".toRegex() // include any word, as it may be a variable
+        val sdkExp = "(compileSdkVersion|minSdkVersion|targetSdkVersion)\\s*([^\\s]*)(.*)".toRegex() // include any word, as it may be a variable
 
         return this.replace(sdkExp) {
             val groups = it.groupValues
@@ -438,7 +458,7 @@ object GradleKotlinConverter {
     // converts the clean task, which is very common to find
     fun String.convertCleanTask(): String {
 
-        val cleanExp = "task clean\\(type: Delete\\)\\s*\\{[\\s\\S]*}".toRegex()
+        val cleanExp = "task clean\\(type: Delete\\)\\s*\\{[\\s\\S]*\\}".toRegex()
         val registerClean = "tasks.register<Delete>(\"clean\").configure {\n" +
                 "    delete(rootProject.buildDir)\n }"
 
@@ -456,6 +476,7 @@ object GradleKotlinConverter {
             .addIsToStr("buildTypes", "debuggable")
             .addIsToStr("buildTypes", "minifyEnabled")
             .addIsToStr("buildTypes", "shrinkResources")
+            .addIsToStr("", "transitive")
     }
 
     fun String.addIsToStr(blockTitle: String, transform: String): String {
@@ -489,6 +510,8 @@ object GradleKotlinConverter {
         val includeExp = "include$expressionBase".toRegex()
 
         return this.replace(includeExp) { includeBlock ->
+            if(includeBlock.value.contains("include\"")) return@replace includeBlock.value // exclude: "include" to
+
             // avoid cases where some lines at the start/end are blank
             val multiLine = includeBlock.value.split('\n').count { it.isNotBlank() } > 1
 
@@ -510,7 +533,7 @@ object GradleKotlinConverter {
         val fullLineExp = ".*configurations\\.classpath\\.exclude.*group:.*".toRegex()
 
         // this will extract "com.android.tools.external.lombok" from the string.
-        val innerExp = "\\\".*\\\"".toRegex()
+        val innerExp = "\".*\"".toRegex()
 
         return this.replace(fullLineExp) { isolatedLine ->
             val isolatedStr = innerExp.find(isolatedLine.value)?.value ?: ""
@@ -520,6 +543,29 @@ object GradleKotlinConverter {
         }
     }
 
+    // exclude module: 'module-id'
+// becomes
+// exclude(module = "module-id")
+    fun String.convertExcludeModules(): String {
+        val fullLineExp = """exclude module: (\S+)""".toRegex()
+
+        return this.replace(fullLineExp) {
+            val (moduleId) = it.destructured
+            "exclude(module = $moduleId)"
+        }
+    }
+
+    // exclude group: 'group-id'
+// becomes
+// exclude(group = "group-id")
+    fun String.convertExcludeGroups(): String {
+        val fullLineExp = """exclude group: (\S+)""".toRegex()
+
+        return this.replace(fullLineExp) {
+            val (groupId) = it.destructured
+            "exclude(group = $groupId)"
+        }
+    }
 
     // classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 // becomes
