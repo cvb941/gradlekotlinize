@@ -15,3 +15,5 @@ gradle-app.setting
 # gradle/wrapper/gradle-wrapper.properties
 
 .firebase
+
+node_modules/

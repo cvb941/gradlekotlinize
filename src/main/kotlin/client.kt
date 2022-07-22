@@ -1,11 +1,7 @@
-import org.w3c.dom.Node
 import kotlinx.browser.document
 import kotlinx.browser.window
-import org.w3c.dom.HTMLInputElement
 import org.w3c.dom.HTMLTextAreaElement
 import org.w3c.dom.events.Event
-import org.w3c.dom.events.KeyboardEvent
-import org.w3c.dom.get
 
 fun main() {
     window.onload = {

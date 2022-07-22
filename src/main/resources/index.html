@@ -4,58 +4,84 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Gradle Kotlinize | Convert build.gradle to Kotlin DSL</title>
+    <title>Convert Groovy to Kotlin Online | Gradle Kotlinize</title>
     <meta name="google-site-verification" content="YigAcC2VCpUF29Bnk9u5MLRRJmkgzmZUTIh-m-QkLg8">
     <meta property="og:image" content="https://gradle-kotlinize.web.app/assets/img/Screenshot 2021-02-25 214819.png">
-    <meta name="twitter:title" content="Gradle Kotlinize | Convert build.gradle to Kotlin DSL">
-    <meta name="description" content="Online tool to migrate your build.gradle files written in Groovy language to the new build.gradle.kts files using the Kotlin DSL.">
+    <meta name="twitter:title" content="Convert Groovy to Kotlin Online | Gradle Kotlinize">
+    <meta name="description"
+          content="Online tool to convert your build.gradle files written in Groovy language to the new build.gradle.kts files using the Kotlin DSL.">
     <meta property="og:type" content="website">
-    <meta name="twitter:description" content="Online tool to migrate your build.gradle files written in Groovy language to the new build.gradle.kts files using the Kotlin DSL.">
+    <meta name="twitter:description"
+          content="Online tool to convert your build.gradle files written in Groovy language to the new build.gradle.kts files using the Kotlin DSL.">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:image" content="https://gradle-kotlinize.web.app/assets/img/Screenshot 2021-02-25 214819.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700">
     <link rel="stylesheet" href="assets/css/styles.css">
-<script src="GradleKotlinize.js"></script>
+    <script src="GradleKotlinize.js"></script>
 </head>
 
 <body>
-    <header class="d-flex justify-content-between align-items-center justify-content-xl-start align-items-xl-center" style="background: var(--bs-green);height: 64px;padding-right: 42px;">
-        <h2 class="me-auto" style="padding-left: 16px;color: var(--bs-white);padding-bottom: 8px;padding-top: 8px;height: 50px;">Gradle Kotlinize</h2> <a href="https://github.com/cvb941/gradlekotlinize">
-<img  alt="GitHub Repo stars" src="https://img.shields.io/github/stars/cvb941/gradlekotlinize?style=social">
+<header class="d-flex justify-content-between align-items-center justify-content-xl-start align-items-xl-center"
+        style="background: var(--bs-green);height: 64px;padding-right: 42px;">
+    <h2 class="me-auto" style="padding-left: 16px;color: var(--bs-white);padding-bottom: 8px;padding-top: 8px;height: 50px;">Gradle Kotlinize - Groovy
+        to Kotlin converter online</h2> <a href="https://github.com/cvb941/gradlekotlinize">
+    <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/cvb941/gradlekotlinize?style=social">
 </a>
-    </header>
-    <p style="padding: 16px;padding-bottom: 8px;">Paste your build.gradle into the left box. The contents will then be converted from Groovy to the new Kotlin-based Gradle build file format in the right box. Use the output in a file named build.gradle.kts in your project.</p>
-    <div class="container" style="max-width: 90%;height: 75vh;">
-        <div class="row" style="height: 100%;">
-            <div class="col-md-6"><strong>Groovy input - build.gradle<br></strong><textarea id="groovyInput" class="prism-live language-groovy" style="width: 100%;height: 92%;"></textarea></div>
-            <div class="col-md-6"><strong>Kotlin output - build.gradle.kts<br></strong><textarea id="kotlinOutput" style="width: 100%;height: 92%;" readonly=""></textarea></div>
-        </div>
+</header>
+<p style="padding: 16px;padding-bottom: 8px;">Paste your build.gradle into the left box. The contents will then be converted from Groovy to the new
+    Kotlin-based Gradle build file format in the right box. Use the output in a file named build.gradle.kts in your project.</p>
+<div class="container" style="max-width: 90%;height: 75vh;">
+    <div class="row" style="height: 100%;">
+        <div class="col-md-6"><strong>Groovy input - build.gradle<br></strong><textarea id="groovyInput" class="prism-live language-groovy"
+                                                                                        style="width: 100%;height: 92%;"></textarea></div>
+        <div class="col-md-6"><strong>Kotlin output - build.gradle.kts<br></strong><textarea id="kotlinOutput" style="width: 100%;height: 92%;"
+                                                                                             readonly=""></textarea></div>
     </div>
-    <footer>
-        <p class="text-center" style="font-size: 12px;">This tool uses the&nbsp;<a href="https://github.com/bernaferrari/GradleKotlinConverter">GradleKotlinConverter</a>&nbsp;project created by&nbsp;<a href="https://github.com/bernaferrari">bernaferrari</a><br></p>
-    </footer><!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="/__/firebase/8.2.9/firebase-app.js"></script>
+</div>
+<p style="padding-left: 64px;padding-right: 64px;text-align: center">Gradle Kotlinize is an online tool to convert Gradle Groovy to Kotlin kts
+    format.</p>
 
-<!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
-<script src="/__/firebase/8.2.9/firebase-analytics.js"></script>
-<script src="/__/firebase/8.2.9/firebase-performance.js"></script>
+<footer>
+    <p class="text-center" style="font-size: 12px;">This tool uses the&nbsp;<a href="https://github.com/bernaferrari/GradleKotlinConverter">GradleKotlinConverter</a>&nbsp;project
+        created by&nbsp;<a href="https://github.com/bernaferrari">bernaferrari</a><br></p>
+</footer>
 
-<!-- Initialize Firebase -->
-<script src="/__/firebase/init.js"></script>
-
-<script>
-    var perf = firebase.performance();
-</script>
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js" integrity="sha512-YBk7HhgDZvBxmtOfUdvX0z8IH2d10Hp3aEygaMNhtF8fSOvBZ16D/1bXZTJV6ndk/L/DlXxYStP8jrF77v2MIg==" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-css.min.js" integrity="sha512-1qYok2x2Rsm2y+mrdyrp00iH7xYSgVyIQ1egDAoT7CBZ3kSzlaJK+NhWAh746NeL3gnH6dnP8FGS+3xOdwO7ig==" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha512-zc7WDnCM3aom2EziyDIRAtQg1mVXLdILE09Bo+aE1xk0AM2c2cVLfSW9NrxE5tKTX44WBY0Z2HClZ05ur9vB6A==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js"
+        integrity="sha512-YBk7HhgDZvBxmtOfUdvX0z8IH2d10Hp3aEygaMNhtF8fSOvBZ16D/1bXZTJV6ndk/L/DlXxYStP8jrF77v2MIg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-css.min.js"
+        integrity="sha512-1qYok2x2Rsm2y+mrdyrp00iH7xYSgVyIQ1egDAoT7CBZ3kSzlaJK+NhWAh746NeL3gnH6dnP8FGS+3xOdwO7ig==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/plugins/autoloader/prism-autoloader.min.js"
+        integrity="sha512-zc7WDnCM3aom2EziyDIRAtQg1mVXLdILE09Bo+aE1xk0AM2c2cVLfSW9NrxE5tKTX44WBY0Z2HClZ05ur9vB6A==" crossorigin="anonymous"></script>
 
 <script src="https://unpkg.com/codeflask/build/codeflask.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta2/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta2/js/bootstrap.bundle.min.js"></script>
+
+
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import {initializeApp} from "https://www.gstatic.com/firebasejs/9.9.1/firebase-app.js";
+    import {getAnalytics} from "https://www.gstatic.com/firebasejs/9.9.1/firebase-analytics.js";
+    // TODO: Add SDKs for Firebase products that you want to use0
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+        apiKey: "AIzaSyCMF4cTcw29I6rFhrcO6pnl23WbFbpDAdk",
+        authDomain: "gradle-kotlinize.firebaseapp.com",
+        projectId: "gradle-kotlinize",
+        storageBucket: "gradle-kotlinize.appspot.com",
+        messagingSenderId: "213473070623",
+        appId: "1:213473070623:web:c428d1581aab4974a08f2a",
+        measurementId: "G-8SFMRNXWCW"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+
+</script>
 </body>
 
 </html>

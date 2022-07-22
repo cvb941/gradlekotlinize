@@ -1,19 +1,18 @@
 plugins {
-    kotlin("js") version "1.5.30"
+    kotlin("js") version "1.7.10"
 }
 
 group = "net.kusik"
-version = "1.1-SNAPSHOT"
+version = "1.2-SNAPSHOT"
 
 repositories {
-    jcenter()
     mavenCentral()
-    maven { url = uri("https://dl.bintray.com/kotlin/kotlinx") }
+    maven("https://maven.pkg.jetbrains.space/public/p/kotlinx-html/maven")
 }
 
 dependencies {
     testImplementation(kotlin("test-js"))
-    implementation("org.jetbrains.kotlinx:kotlinx-html:0.7.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-html-js:0.8.0")
 }
 
 kotlin {
