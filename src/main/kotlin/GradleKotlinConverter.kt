@@ -1,3 +1,5 @@
+@OptIn(ExperimentalJsExport::class)
+@JsExport
 object GradleKotlinConverter {
 
     fun convert(groovyCode: String): String {
@@ -93,7 +95,10 @@ object GradleKotlinConverter {
         val mapRegExp = """\[($keyValueGroup(?:,$keyValueGroup)*)\]""".toRegex()
         val extractOneGroupRegExp = """^\s*($key):\s*($value)\s*(?:,(.*)|)$""".toRegex() // Matches key, value, the-rest after comma if any
 
-        fun extractAllMatches(matchesInKotlinCode: MutableList<String>, remainingString: String) { // Extract the first key=value, and recurse on the postfix
+        fun extractAllMatches(
+            matchesInKotlinCode: MutableList<String>,
+            remainingString: String
+        ) { // Extract the first key=value, and recurse on the postfix
             val innerMatch: MatchResult = extractOneGroupRegExp.find(remainingString) ?: return
             val innerGroups = innerMatch.groupValues
             matchesInKotlinCode += """"${innerGroups[1]}" to ${innerGroups[2]}"""
@@ -511,7 +516,7 @@ object GradleKotlinConverter {
         val includeExp = "include$expressionBase".toRegex()
 
         return this.replace(includeExp) { includeBlock ->
-            if(includeBlock.value.contains("include\"")) return@replace includeBlock.value // exclude: "include" to
+            if (includeBlock.value.contains("include\"")) return@replace includeBlock.value // exclude: "include" to
 
             // avoid cases where some lines at the start/end are blank
             val multiLine = includeBlock.value.split('\n').count { it.isNotBlank() } > 1

@@ -1,3 +1,5 @@
+@OptIn(ExperimentalJsExport::class)
+@JsExport
 object Sample {
     const val GROOVY = """plugins {
     id 'com.android.application'

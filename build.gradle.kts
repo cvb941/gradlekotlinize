@@ -1,9 +1,9 @@
 plugins {
-    kotlin("js") version "1.7.10"
+    kotlin("js") version "1.8.0-Beta"
 }
 
 group = "net.kusik"
-version = "1.2-SNAPSHOT"
+version = "1.3"
 
 repositories {
     mavenCentral()
@@ -13,6 +13,8 @@ repositories {
 dependencies {
     testImplementation(kotlin("test-js"))
     implementation("org.jetbrains.kotlinx:kotlinx-html-js:0.8.0")
+
+//    implementation(npm("monaco-editor", "0.34.1", generateExternals = true))
 }
 
 kotlin {
@@ -20,15 +22,12 @@ kotlin {
         browser {
             binaries.executable()
             webpackTask {
-                cssSupport.enabled = true
             }
             runTask {
-                cssSupport.enabled = true
             }
             testTask {
                 useKarma {
                     useChromeHeadless()
-                    webpackConfig.cssSupport.enabled = true
                 }
             }
         }
