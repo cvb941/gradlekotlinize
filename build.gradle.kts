@@ -1,9 +1,9 @@
 plugins {
-    kotlin("js") version "1.8.0-Beta"
+    kotlin("js") version "1.8.0"
 }
 
 group = "net.kusik"
-version = "1.3"
+version = "1.4"
 
 repositories {
     mavenCentral()

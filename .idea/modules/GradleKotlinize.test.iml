@@ -9,7 +9,7 @@
         </externalSystemTestTasks>
         <testOutputPath>$MODULE_DIR$/../../build/classes/kotlin/test</testOutputPath>
         <compilerSettings>
-          <option name="additionalArguments" value="-Xir-only -Xir-per-module-output-name=GradleKotlinize-test -Xir-produce-klib-dir -Xir-module-name=net.kusik:GradleKotlinize_test" />
+          <option name="additionalArguments" value="-Xir-module-name=net.kusik:GradleKotlinize_test -Xir-only -Xir-per-module-output-name=GradleKotlinize-test -Xir-produce-klib-dir" />
         </compilerSettings>
         <compilerArguments>
           <flagArguments>

@@ -6,7 +6,7 @@
         <newMppModelJpsModuleKind>COMPILATION_AND_SOURCE_SET_HOLDER</newMppModelJpsModuleKind>
         <productionOutputPath>$MODULE_DIR$/../../build/classes/kotlin/main</productionOutputPath>
         <compilerSettings>
-          <option name="additionalArguments" value="-Xir-only -Xir-per-module-output-name=GradleKotlinize -Xir-produce-klib-dir -Xir-module-name=net.kusik:GradleKotlinize" />
+          <option name="additionalArguments" value="-Xir-module-name=net.kusik:GradleKotlinize -Xir-only -Xir-per-module-output-name=GradleKotlinize -Xir-produce-klib-dir" />
         </compilerSettings>
         <compilerArguments>
           <flagArguments>
