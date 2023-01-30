@@ -1,6 +1,7 @@
 @OptIn(ExperimentalJsExport::class)
 @JsExport
 object Sample {
+    //language=Groovy
     const val GROOVY = """plugins {
     id 'com.android.application'
 }

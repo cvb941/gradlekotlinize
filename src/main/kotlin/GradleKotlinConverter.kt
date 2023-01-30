@@ -2,8 +2,8 @@
 @JsExport
 object GradleKotlinConverter {
 
-    fun convert(groovyCode: String): String {
-        return groovyCode
+    fun convert(groovyCode: String): String? = kotlin.runCatching {
+         groovyCode
             .replaceApostrophes()
             .replaceDefWithVal()
             .convertMapExpression() // Run before array
@@ -40,7 +40,7 @@ object GradleKotlinConverter {
             .addParenthesisToId()
             .replaceColonWithEquals()
 
-    }
+    }.getOrNull()
 
 
     // anything with ' ('1.0.0', 'kotlin-android', 'jitpack', etc)

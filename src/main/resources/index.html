@@ -83,7 +83,7 @@
     editorGroovy.onDidChangeModelContent((event) => {
         var groovy = editorGroovy.getValue();
         var kotlin = GradleKotlinize.GradleKotlinConverter.convert(groovy);
-        editorKotlin.setValue(kotlin);
+        editorKotlin.setValue(kotlin ?? "An error occurred.\n\nSome part of your input is probably not supported yet.\nTry again with a smaller part of your build.gradle.");
     });
 
     // Initial content

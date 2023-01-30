@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/GradleKotlinize.main.iml" filepath="$PROJECT_DIR$/.idea/modules/GradleKotlinize.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/GradleKotlinize.test.iml" filepath="$PROJECT_DIR$/.idea/modules/GradleKotlinize.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/net.kusik.GradleKotlinize.main.iml" filepath="$PROJECT_DIR$/.idea/modules/net.kusik.GradleKotlinize.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/net.kusik.GradleKotlinize.test.iml" filepath="$PROJECT_DIR$/.idea/modules/net.kusik.GradleKotlinize.test.iml" />
     </modules>
   </component>
 </project>
