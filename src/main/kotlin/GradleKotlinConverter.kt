@@ -3,7 +3,7 @@
 object GradleKotlinConverter {
 
     fun convert(groovyCode: String): String? = kotlin.runCatching {
-         groovyCode
+        groovyCode
             .replaceApostrophes()
             .replaceDefWithVal()
             .convertMapExpression() // Run before array
@@ -40,7 +40,10 @@ object GradleKotlinConverter {
             .addParenthesisToId()
             .replaceColonWithEquals()
 
-    }.getOrNull()
+    }.getOrElse {
+        println("Conversion failed: $it")
+        null
+    }
 
 
     // anything with ' ('1.0.0', 'kotlin-android', 'jitpack', etc)
