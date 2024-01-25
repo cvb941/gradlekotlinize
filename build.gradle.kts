@@ -1,20 +1,13 @@
 plugins {
-    kotlin("js") version "1.8.0"
+    kotlin("multiplatform") version "1.9.22"
 }
 
 group = "net.kusik"
-version = "1.5"
+version = "1.6"
 
 repositories {
     mavenCentral()
     maven("https://maven.pkg.jetbrains.space/public/p/kotlinx-html/maven")
-}
-
-dependencies {
-    testImplementation(kotlin("test-js"))
-    implementation("org.jetbrains.kotlinx:kotlinx-html-js:0.8.0")
-
-//    implementation(npm("monaco-editor", "0.34.1", generateExternals = true))
 }
 
 kotlin {
@@ -29,6 +22,22 @@ kotlin {
                 useKarma {
                     useChromeHeadless()
                 }
+            }
+        }
+    }
+
+    sourceSets {
+        val jsMain by getting {
+            dependencies {
+                implementation("org.jetbrains.kotlinx:kotlinx-html-js:0.11.0")
+
+//    implementation(npm("monaco-editor", "0.34.1", generateExternals = true))
+            }
+        }
+
+        val jsTest by getting {
+            dependencies {
+                implementation(kotlin("test-js"))
             }
         }
     }
